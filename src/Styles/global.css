@@ -1,0 +1,511 @@
+/* --- 1. CONFIGURAÇÕES GLOBAIS E NOVA PALETA DE COR --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  /* NOVA Paleta de Cores "Blush & Purple" */
+  --rosa-header: #f1d7df;      /* Rosa bem claro para o header */
+  --rosa-vibrante: #F06292;   /* Rosa forte para detalhes */
+  --rosa-profundo: #EC407A;
+  --roxo-texto: #4A2A54;      /* Roxo escuro e elegante para textos */
+  --branco: #FFFFFF;
+  --fundo-pagina: #fcfcff;
+
+  /* Padrões de Design */
+  --sombra-suave: 0 4px 20px rgba(0, 0, 0, 0.07);
+  --sombra-elevada: 0 10px 30px rgba(236, 64, 122, 0.2);
+  --borda-arredondada: 16px;
+  --transicao-rapida: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--fundo-pagina);
+  /* MUDANÇA: Cor do texto principal agora é roxa */
+  color: var(--roxo-texto);
+  line-height: 1.7;
+}
+
+/* Barra de Rolagem Customizada (Mantida) */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--rosa-header); }
+::-webkit-scrollbar-thumb { background: var(--rosa-vibrante); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--rosa-profundo); }
+
+/* --- 2. LAYOUT E HEADER ATUALIZADO --- */
+.site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  max-width: 1000px;
+  width: 100%;
+  margin: 1rem auto;
+  padding: 0 2rem;
+}
+
+/* SUA SOLICITAÇÃO: Header rosa mais claro */
+header {
+  padding: 1rem 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  
+  background: var(--rosa-header);
+  border-bottom: 1px solid rgba(236, 64, 122, 0.2);
+  box-shadow: var(--sombra-suave);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- HOVER COM TEXTO EXPLICATIVO NA LOGO --- */
+
+/* O novo container que agrupa a logo e o texto escondido */
+.logo-container-with-tooltip {
+  position: relative; /* Essencial para o posicionamento absoluto do tooltip */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* O texto escondido (tooltip) */
+.logo-tooltip {
+  /* POSICIONAMENTO */
+  position: absolute;
+  top: 105%; /* Posiciona um pouco abaixo do container da logo */
+  left: 50%;
+  
+  /* ESTADO INICIAL (ESCONDIDO) */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* Impede que seja clicável quando invisível */
+  transform: translateX(-50%) translateY(-10px); /* Centraliza e move um pouco para cima */
+  
+  /* ESTILO VISUAL */
+  background-color: var(--roxo-texto);
+  color: var(--branco);
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap; /* Impede que o texto quebre em duas linhas */
+  box-shadow: var(--sombra-elevada);
+  
+  /* ANIMAÇÃO */
+  transition: all 0.3s ease;
+  z-index: 100; /* Garante que o texto fique por cima de outros elementos */
+}
+
+/* O "balãozinho" triangular apontando para a logo */
+.logo-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%; /* Posicionado no topo do tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--roxo-texto) transparent; /* O truque do triângulo com CSS */
+}
+
+/* O EFEITO MÁGICO AO PASSAR O MOUSE */
+.logo-container-with-tooltip:hover .logo-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* A área que agrupa o círculo da logo e o título */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* O "wrapper" que será nosso círculo visível com a borda */
+.logo-wrapper {
+  width: 110px;  /* Mantendo o tamanho maior que você pediu */
+  height: 110px;
+  border-radius: 50%;
+  border: 5px solid var(--rosa-vibrante);
+  background-color: var(--branco);
+  
+  /* A MÁGICA: Esconde tudo que "vazar" para fora do círculo */
+  overflow: hidden; 
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--sombra-suave);
+  transition: var(--transicao-rapida);
+  flex-shrink: 0;
+}
+
+/* A imagem que está DENTRO do wrapper */
+.logo-img {
+  width: 70px;
+  height: 70px;
+  border: none;
+  transition: var(--transicao-rapida);
+  
+  transform: scale(1.9); 
+}
+
+/* Efeito de hover no wrapper */
+.logo-wrapper:hover {
+  transform: scale(1.1);
+  border-color: var(--rosa-profundo);
+  box-shadow: var(--sombra-elevada);
+}
+
+/* O efeito de hover na imagem interna (com o giro) */
+.logo-wrapper:hover .logo-img {
+  /* A imagem amplia um pouco mais e gira */
+  transform: scale(2.0) rotate(360deg); 
+}
+
+/* Estilo do H1 (mantido para consistência) */
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--roxo-texto);
+}
+
+nav {
+  display: flex;
+  gap: 5px;
+}
+
+nav button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: var(--transicao-rapida);
+  position: relative;
+  overflow: hidden;
+  /* MUDANÇA: Cor do texto dos botões */
+  color: var(--roxo-texto);
+}
+
+nav button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--rosa-vibrante);
+  transition: var(--transicao-rapida);
+}
+
+nav button:hover::after { width: 80%; }
+nav button:hover { color: var(--rosa-profundo); }
+
+/* Footer com Gradiente Animado (Mantido) */
+footer {
+  text-align: center;
+  padding: 3rem;
+  color: var(--branco);
+  font-weight: 600;
+  margin-top: 4rem;
+  background: linear-gradient(45deg, var(--rosa-vibrante), var(--rosa-profundo));
+  background-size: 200% 200%;
+  animation: gradientFlow 8s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- 3. SEÇÕES E CARDS --- */
+section {
+  padding: 2rem 0;
+}
+
+.card {
+  background-color: var(--branco);
+  padding: 2.5rem;
+  border-radius: var(--borda-arredondada);
+  box-shadow: var(--sombra-suave);
+  margin-top: 1rem;
+  transition: var(--transicao-rapida);
+  
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeAndSlideUp 0.8s forwards;
+}
+
+@keyframes fadeAndSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--sombra-elevada);
+}
+
+h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(45deg, var(--rosa-vibrante), var(--rosa-profundo));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: var(--roxo-texto);
+}
+
+/* --- ESTILIZAÇÃO FINAL: SWOT COM CSS GRID --- */
+
+/* Ajuste no card para conter a grade perfeitamente */
+.swot-card {
+  padding: 0;
+  overflow: hidden;
+  background: var(--rosa-header); /* Cor de fundo para as linhas divisórias */
+}
+
+/* O container que cria a grade 2x2 */
+.swot-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas de largura igual */
+  grid-template-rows: auto auto;    /* Duas linhas com altura automática */
+  gap: 2px; /* O espaçamento entre os quadrantes, que cria as linhas divisórias */
+}
+
+/* Cada um dos 4 quadrantes */
+.swot-quadrant {
+  background: var(--branco);
+  transition: var(--transicao-rapida);
+  will-change: transform;
+}
+
+/* O cabeçalho de cada quadrante (Forças, etc) */
+.swot-header {
+  background: linear-gradient(45deg, var(--rosa-vibrante), var(--rosa-profundo));
+  color: var(--branco);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Ícones dentro dos cabeçalhos */
+.swot-header svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--branco);
+}
+
+.swot-header:hover {
+    transform: scale(1.02);
+    z-index: 10;
+    position: relative; /* Necessário para o z-index e box-shadow funcionarem bem */
+}
+
+/* O conteúdo de cada quadrante */
+.swot-content {
+  padding: 1.5rem;
+}
+
+/* Estilo da lista de itens (mantido) */
+.swot-quadrant ul { list-style: none; padding: 0; margin: 0; }
+.swot-quadrant li { position: relative; padding-left: 25px; margin-bottom: 0.8rem; }
+.swot-quadrant li:last-child { margin-bottom: 0; }
+.swot-quadrant li::before { content: '✓'; position: absolute; left: 0; top: -2px; color: var(--rosa-vibrante); font-weight: 700; font-size: 1.2rem; }
+
+/* O EFEITO DE HOVER PERFEITO */
+.swot-quadrant li:hover {
+  transform: scale(1.02);
+  z-index: 10;
+  position: relative; /* Necessário para o z-index e box-shadow funcionarem bem */
+}
+
+/* --- 4. COMPONENTES ESPECÍFICOS E RESPONSIVIDADE --- */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--rosa-header);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 60px;
+}
+.timeline-dot {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--rosa-vibrante);
+  border: 5px solid var(--fundo-pagina);
+}
+.timeline-content {
+  background-color: var(--branco);
+  padding: 1.5rem;
+  border-radius: var(--borda-arredondada);
+  box-shadow: var(--sombra-suave);
+  transition: var(--transicao-rapida);
+}
+.timeline-content:hover {
+  transform: translateX(10px);
+  box-shadow: var(--sombra-elevada);
+}
+
+.portfolio-imagem img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--borda-arredondada);
+  border: 5px solid var(--branco);
+  box-shadow: var(--sombra-elevada);
+}
+
+.slogan {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.contato {
+  margin-top: 1.5rem;
+}
+
+/* --- ESTILIZAÇÃO MODERNA PARA A LISTA DE KPIs --- */
+
+/* Título azul que estava sem estilo */
+.titulo-azul {
+  color: var(--rosa-profundo);
+  margin-top: 3rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--rosa-header);
+}
+
+/* O container que organiza a lista de metas */
+.kpi-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Espaço entre cada item da lista */
+  margin-top: 2rem;
+}
+
+/* Cada item/meta da lista */
+.kpi-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* Faz com que as colunas tenham a mesma altura */
+  background: var(--branco);
+  border: 1px solid var(--rosa-header);
+  border-radius: var(--borda-arredondada);
+  padding: 1rem;
+  transition: var(--transicao-rapida);
+  will-change: transform;
+}
+
+/* O conteúdo dentro de cada coluna (Meta, Indicador, Responsável) */
+.kpi-content {
+  padding: 0.5rem 1rem;
+  flex: 1; /* Garante que as colunas dividam o espaço igualmente */
+  border-left: 1px dashed var(--rosa-header);
+}
+
+.kpi-content:first-child {
+  border-left: none; /* Remove a borda da primeira coluna */
+}
+
+/* O rótulo pequeno (Meta, Indicador, etc.) */
+.kpi-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--rosa-vibrante);
+  margin-bottom: 0.25rem;
+}
+
+/* O texto principal da meta */
+.kpi-content p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--roxo-texto);
+}
+
+/* O EFEITO DE HOVER PERFEITO NA LINHA INTEIRA */
+.kpi-item:hover {
+  transform: scale(1.03);
+  box-shadow: var(--sombra-elevada);
+  z-index: 10;
+  position: relative;
+  border-color: transparent; /* Esconde a borda para dar destaque à sombra */
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  nav button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  main {
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
