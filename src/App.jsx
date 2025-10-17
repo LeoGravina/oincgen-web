@@ -8,7 +8,7 @@ import Plano from './components/Sections/Plano.jsx';
 import Cronograma from './components/Sections/Cronograma.jsx';
 import Relatorio from './components/Sections/Relatorio.jsx';
 import Portfolio from './components/Sections/Portfolio.jsx';
-import './styles/global.css';
+import './Styles/global.css';
 
 function App() {
   const [activeSection, setActiveSection] = useState('identidade');
