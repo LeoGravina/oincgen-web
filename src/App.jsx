@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Identidade from './components/Sections/Identidade';
-import Mercado from './components/Sections/Mercado';
-import Swot from './components/Sections/Swot';
-import Plano from './components/Sections/Plano';
-import Cronograma from './components/Sections/Cronograma';
-import Relatorio from './components/Sections/Relatorio';
-import Portfolio from './components/Sections/Portfolio';
+import Identidade from './components/sections/Identidade';
+import Mercado from './components/sections/Mercado';
+import Swot from './components/sections/Swot';
+import Plano from './components/sections/Plano';
+import Cronograma from './components/sections/Cronograma';
+import Relatorio from './components/sections/Relatorio';
+import Portfolio from './components/sections/Portfolio';
 import './styles/global.css';
 
 function App() {
