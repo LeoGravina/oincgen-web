@@ -483,6 +483,36 @@ h3 {
   border-color: transparent; /* Esconde a borda para dar destaque à sombra */
 }
 
+/* --- AJUSTES DE RESPONSIVIDADE PARA TABELAS E LISTAS --- */
+@media (max-width: 768px) {
+  
+  /* --- AJUSTE PARA TABELA SWOT NO MOBILE --- */
+  .swot-card {
+    /* Adiciona a barra de rolagem horizontal se o conteúdo de dentro for maior que a tela */
+    overflow-x: auto;
+    /* Melhora a experiência de rolagem em dispositivos touch */
+    -webkit-overflow-scrolling: touch;
+  }
+  .swot-grid-container {
+    /* Força a tabela a ter uma largura mínima, o que ativa a barra de rolagem */
+    min-width: 650px; 
+  }
+
+  /* --- AJUSTE PARA LISTA DE KPIs NO MOBILE --- */
+  .kpi-item {
+    /* Adiciona a barra de rolagem em cada linha de KPI individualmente */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .kpi-content {
+    /* Impede que as colunas (Meta, Indicador, Responsável) encolham */
+    flex-shrink: 0;
+    /* Define uma largura mínima para cada coluna, forçando a rolagem */
+    min-width: 180px;
+  }
+
+}
+
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
