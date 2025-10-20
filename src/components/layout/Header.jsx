@@ -1,14 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // <<< Manter o Link para a logo
+import { Link } from 'react-router-dom';
 import logoImg from '../../assets/logo.png';
 
-// Recebemos a função 'showSection' como prop
-function Header({ showSection }) {
+// 1. Recebe as novas props
+function Header({ sections, setActiveSection, isHomePage }) {
+  
+  // Função para capitalizar os nomes (ex: 'identidade' -> 'Identidade')
+  const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
   return (
     <header>
       <div className="header-content">
-        {/* O link na logo agora também reseta para a seção inicial */}
-        <Link to="/" className="logo-area-link" onClick={() => showSection('identidade')}>
+        <Link 
+          to="/" 
+          className="logo-area-link" 
+          // 2. O logo sempre leva para a seção 0 ('identidade')
+          onClick={() => isHomePage && setActiveSection(0)}
+        >
           <div className="logo-area">
             <div className="logo-container-with-tooltip">
               <div className="logo-wrapper">
@@ -22,16 +30,20 @@ function Header({ showSection }) {
           </div>
         </Link>
         
-        <nav>
-          {/* --- ALTERADO: Voltamos a usar <button> com onClick --- */}
-          <button className="nav-button" onClick={() => showSection('identidade')}>Identidade</button>
-          <button className="nav-button" onClick={() => showSection('mercado')}>Mercado</button>
-          <button className="nav-button" onClick={() => showSection('swot')}>SWOT</button>
-          <button className="nav-button" onClick={() => showSection('plano')}>Plano</button>
-          <button className="nav-button" onClick={() => showSection('cronograma')}>Cronograma</button>
-          <button className="nav-button" onClick={() => showSection('relatorio')}>Relatório</button>
-          <button className="nav-button" onClick={() => showSection('portfolio')}>Portfólio</button>
-        </nav>
+        {/* 3. Renderiza os botões dinamicamente */}
+        {isHomePage && (
+          <nav>
+            {sections.map((id, index) => (
+              <button
+                key={id}
+                className="nav-button"
+                onClick={() => setActiveSection(index)} // Seta o índice
+              >
+                {capitalize(id)}
+              </button>
+            ))}
+          </nav>
+        )}
       </div>
     </header>
   );

@@ -2,21 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  /* Paleta de Cores "Blush & Purple" (Mantida) */
+  /* Paleta de Cores */
   --rosa-header: #ebbcca;
   --rosa-vibrante: #F06292;
   --rosa-profundo: #EC407A;
   --roxo-texto: #37213e;
   --branco: #FFFFFF;
   --fundo-pagina: #fcfcff;
-
   /* Padrões de Design */
   --sombra-suave: 0 4px 20px rgba(0, 0, 0, 0.07);
   --sombra-elevada: 0 10px 30px rgba(236, 64, 122, 0.2);
   --borda-arredondada: 16px;
   --transicao-rapida: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
-
-  /* --- NOVO: Variáveis de Espaçamento para Consistência --- */
+  /* Variáveis de Espaçamento */
   --space-xs: 0.5rem;  /* 8px */
   --space-sm: 1rem;    /* 16px */
   --space-md: 1.5rem;  /* 24px */
@@ -31,7 +29,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* --- NOVO: Habilita a rolagem suave para os links de âncora --- */
 html {
   scroll-behavior: smooth;
 }
@@ -42,13 +39,7 @@ body {
   line-height: 1.7;
 }
 
-/* Barra de Rolagem Customizada (Mantida) */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--rosa-header); }
-::-webkit-scrollbar-thumb { background: var(--rosa-vibrante); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--rosa-profundo); }
-
-/* --- 2. LAYOUT E HEADER --- */
+/* --- 2. LAYOUT GERAL (HEADER, MAIN, FOOTER) --- */
 .site-container {
   display: flex;
   flex-direction: column;
@@ -57,10 +48,9 @@ body {
 
 main {
   flex-grow: 1;
-  max-width: 1100px; /* Aumentado um pouco para o novo layout */
-  width: 100%;
-  margin: var(--space-sm) auto;
-  padding: 0 var(--space-md);
+  width: 100%; /* <-- MUDANÇA: 'main' agora é 100% largo */
+  /* REMOVEMOS max-width, margin: auto, e padding daqui */
+  overflow-x: hidden; 
 }
 
 header {
@@ -82,76 +72,60 @@ header {
   margin: 0 auto;
 }
 
-/* Tooltip da Logo (Mantido) */
-.logo-container-with-tooltip { position: relative; display: flex; justify-content: center; align-items: center; }
-.logo-tooltip { position: absolute; top: 105%; left: 50%; opacity: 0; visibility: hidden; pointer-events: none; transform: translateX(-50%) translateY(-10px); background-color: var(--roxo-texto); color: var(--branco); padding: 8px 15px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; box-shadow: var(--sombra-elevada); transition: all 0.3s ease; z-index: 100; }
-.logo-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: transparent transparent var(--roxo-texto) transparent; }
-.logo-container-with-tooltip:hover .logo-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-.logo-area { display: flex; align-items: center; gap: 15px; }
-.logo-wrapper { width: 110px; height: 110px; border-radius: 50%; border: 5px solid var(--rosa-vibrante); background-color: var(--branco); overflow: hidden; display: flex; justify-content: center; align-items: center; box-shadow: var(--sombra-suave); transition: var(--transicao-rapida); flex-shrink: 0; }
-.logo-img { width: 70px; height: 70px; border: none; transition: var(--transicao-rapida); transform: scale(1.9); }
-.logo-wrapper:hover { transform: scale(1.1); border-color: var(--rosa-profundo); box-shadow: var(--sombra-elevada); }
-.logo-wrapper:hover .logo-img { transform: scale(2.0) rotate(360deg); }
-header h1 { font-size: 1.8rem; margin: 0; color: var(--roxo-texto); }
-
-nav {
-  display: flex;
-  gap: 5px;
-}
-
-/* --- ALTERADO: Estilo movido de 'button' para a classe '.nav-button' --- */
-.nav-button {
-  background: none;
-  border: none;
-  font-size: 1.1rem;
-  font-weight: 800;
-  padding: 12px 20px;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: var(--transicao-rapida);
-  position: relative;
-  overflow: hidden;
-  color: var(--roxo-texto);
-  text-decoration: none; /* Remove sublinhado de link */
-}
-
-.nav-button::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 3px;
-  background: var(--rosa-vibrante);
-  transition: var(--transicao-rapida);
-}
-
-.nav-button:hover::after { width: 80%; }
-.nav-button:hover { color: var(--rosa-profundo); }
-
 footer {
-  text-align: center;
-  padding: var(--space-lg);
-  color: var(--branco);
-  font-weight: 600;
-  margin-top: var(--space-xl);
   background: linear-gradient(45deg, var(--rosa-vibrante), var(--rosa-profundo));
   background-size: 200% 200%;
   animation: gradientFlow 8s ease infinite;
+  color: var(--branco);
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
 }
 
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
-/* --- 3. SEÇÕES E LAYOUTS --- */
-/* Substitua a regra antiga por esta */
+.footer-copyright,
+.footer-developer-credit {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.footer-developer-credit a {
+  color: var(--branco);
+  font-weight: 700;
+  text-decoration: underline;
+  margin-left: var(--space-xs);
+  transition: opacity 0.3s ease;
+}
+
+.footer-developer-credit a:hover {
+  opacity: 0.8;
+}
+
+/* --- 3. COMPONENTES DE LAYOUT (SECTIONS, CARDS, TÍTULOS) --- */
+.content-wrapper {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+@media (max-width: 768px) {
+  /* Não esqueça de adicionar o padding para o wrapper em mobile */
+  .content-wrapper {
+    padding: 0 var(--space-sm);
+  }
+}
+
 section {
-  /* --- VALOR REDUZIDO --- */
-  padding: var(--space-lg) 0; /* Novo valor: 2.5rem (40px) */
+  padding: var(--space-lg) 0;
   scroll-margin-top: 120px; 
 }
 
@@ -162,13 +136,7 @@ section {
   box-shadow: var(--sombra-suave);
   margin-top: var(--space-sm);
   transition: var(--transicao-rapida);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeAndSlideUp 0.8s forwards;
-}
-
-@keyframes fadeAndSlideUp {
-  to { opacity: 1; transform: translateY(0); }
+  /* ANIMAÇÃO 'fadeAndSlideUp' REMOVIDA DAQUI */
 }
 
 .card:hover {
@@ -192,7 +160,6 @@ h3 {
   color: var(--roxo-texto);
 }
 
-/* --- NOVO: Layout dinâmico de duas colunas --- */
 .layout-duas-colunas {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -207,8 +174,44 @@ h3 {
   margin-bottom: var(--space-sm);
 }
 
-/* --- 4. COMPONENTES ESPECÍFICOS --- */
-/* SWOT (Mantido) */
+/* --- 4. COMPONENTES ESPECÍFICOS (HEADER, SWOT, TIMELINE, ETC.) --- */
+
+/* Header Logo & Nav */
+.logo-area-link {
+  text-decoration: none;
+  color: inherit;
+}
+.logo-container-with-tooltip { position: relative; display: flex; justify-content: center; align-items: center; }
+.logo-tooltip { position: absolute; top: 105%; left: 50%; opacity: 0; visibility: hidden; pointer-events: none; transform: translateX(-50%) translateY(-10px); background-color: var(--roxo-texto); color: var(--branco); padding: 8px 15px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; box-shadow: var(--sombra-elevada); transition: all 0.3s ease; z-index: 100; }
+.logo-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: transparent transparent var(--roxo-texto) transparent; }
+.logo-container-with-tooltip:hover .logo-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.logo-area { display: flex; align-items: center; gap: 15px; }
+.logo-wrapper { width: 110px; height: 110px; border-radius: 50%; border: 5px solid var(--rosa-vibrante); background-color: var(--branco); overflow: hidden; display: flex; justify-content: center; align-items: center; box-shadow: var(--sombra-suave); transition: var(--transicao-rapida); flex-shrink: 0; }
+.logo-img { width: 70px; height: 70px; border: none; transition: var(--transicao-rapida); transform: scale(1.9); }
+.logo-wrapper:hover { transform: scale(1.1); border-color: var(--rosa-profundo); box-shadow: var(--sombra-elevada); }
+.logo-wrapper:hover .logo-img { transform: scale(2.0) rotate(360deg); }
+header h1 { font-size: 1.8rem; margin: 0; color: var(--roxo-texto); }
+
+nav { display: flex; gap: 5px; }
+.nav-button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: var(--transicao-rapida);
+  position: relative;
+  overflow: hidden;
+  color: var(--roxo-texto);
+  text-decoration: none;
+}
+.nav-button::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--rosa-vibrante); transition: var(--transicao-rapida); }
+.nav-button:hover::after { width: 80%; }
+.nav-button:hover { color: var(--rosa-profundo); }
+
+/* SWOT */
 .swot-card { padding: 0; overflow: hidden; background: var(--rosa-header); }
 .swot-grid-container { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 2px; }
 .swot-quadrant { background: var(--branco); transition: var(--transicao-rapida); will-change: transform; }
@@ -222,148 +225,34 @@ h3 {
 .swot-quadrant li::before { content: '✓'; position: absolute; left: 0; top: -2px; color: var(--rosa-vibrante); font-weight: 700; font-size: 1.2rem; }
 .swot-quadrant li:hover { transform: scale(1.02); z-index: 10; position: relative; }
 
-/* Cronograma (Timeline) com ANIMAÇÃO ESCALONADA */
+/* Cronograma (Timeline) */
 .timeline { position: relative; padding: var(--space-md) 0; }
 .timeline::before { content: ''; position: absolute; left: 19px; top: 0; bottom: 0; width: 3px; background-color: var(--rosa-header); }
-.timeline-item { position: relative; margin-bottom: var(--space-md); padding-left: 60px; /* --- NOVO: Animação --- */ opacity: 0; transform: translateX(-30px); animation: fadeAndSlideInLeft 0.7s forwards; }
+.timeline-item { position: relative; margin-bottom: var(--space-md); padding-left: 60px; /* ANIMAÇÃO 'fadeAndSlideInLeft' REMOVIDA */ }
 .timeline-dot { position: absolute; left: 5px; top: 5px; width: 28px; height: 28px; border-radius: 50%; background-color: var(--rosa-vibrante); border: 5px solid var(--fundo-pagina); }
 .timeline-content { background-color: var(--branco); padding: var(--space-md); border-radius: var(--borda-arredondada); box-shadow: var(--sombra-suave); transition: var(--transicao-rapida); }
 .timeline-content:hover { transform: translateX(10px); box-shadow: var(--sombra-elevada); }
 
-/* --- NOVO: Atraso na animação para cada item --- */
-.timeline-item:nth-child(1) { animation-delay: 0.2s; }
-.timeline-item:nth-child(2) { animation-delay: 0.4s; }
-.timeline-item:nth-child(3) { animation-delay: 0.6s; }
-.timeline-item:nth-child(4) { animation-delay: 0.8s; }
-
-@keyframes fadeAndSlideInLeft {
-  to { opacity: 1; transform: translateX(0); }
-}
-
 /* Portfolio */
 .portfolio-imagem img { width: 100%; height: auto; border-radius: var(--borda-arredondada); border: 5px solid var(--branco); box-shadow: var(--sombra-elevada); }
 .slogan { font-size: 1.2rem; font-style: italic; margin-bottom: var(--space-sm); }
+.contato-icones { margin-top: var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm); }
+.contato-icones a, .contato-icones div { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; color: var(--roxo-texto); font-weight: 600; transition: var(--transicao-rapida); }
+.contato-icones a:hover { color: var(--rosa-profundo); transform: translateX(5px); }
+.contato-icones svg { font-size: 1.5rem; color: var(--rosa-vibrante); }
 
-/* --- NOVO: Estilo para a seção de contato com ícones --- */
-.contato-icones {
-  margin-top: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-.contato-icones a, .contato-icones div {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  text-decoration: none;
-  color: var(--roxo-texto);
-  font-weight: 600;
-  transition: var(--transicao-rapida);
-}
-.contato-icones a:hover {
-  color: var(--rosa-profundo);
-  transform: translateX(5px);
-}
-.contato-icones svg {
-  font-size: 1.5rem;
-  color: var(--rosa-vibrante);
-}
-
-
-/* KPIs com ANIMAÇÃO ESCALONADA */
+/* KPIs (Plano) */
 .titulo-azul { color: var(--rosa-profundo); margin-top: var(--space-lg); padding-bottom: var(--space-xs); border-bottom: 2px solid var(--rosa-header); }
 .kpi-list-container { display: flex; flex-direction: column; gap: var(--space-sm); margin-top: var(--space-md); }
-.kpi-item { display: flex; justify-content: space-between; align-items: stretch; background: var(--branco); border: 1px solid var(--rosa-header); border-radius: var(--borda-arredondada); padding: var(--space-sm); transition: var(--transicao-rapida); will-change: transform; /* --- NOVO: Animação --- */ opacity: 0; transform: translateY(30px); animation: fadeAndSlideUp 0.7s forwards; }
+.kpi-item { display: flex; justify-content: space-between; align-items: stretch; background: var(--branco); border: 1px solid var(--rosa-header); border-radius: var(--borda-arredondada); padding: var(--space-sm); transition: var(--transicao-rapida); will-change: transform; /* ANIMAÇÃO 'fadeAndSlideUp' REMOVIDA */ }
 .kpi-content { padding: var(--space-xs) var(--space-sm); flex: 1; border-left: 1px dashed var(--rosa-header); }
 .kpi-content:first-child { border-left: none; }
 .kpi-label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--rosa-vibrante); margin-bottom: 0.25rem; }
 .kpi-content p { font-size: 1rem; font-weight: 600; color: var(--roxo-texto); }
 .kpi-item:hover { transform: scale(1.03); box-shadow: var(--sombra-elevada); z-index: 10; position: relative; border-color: transparent; }
 
-/* --- NOVO: Atraso na animação para cada item --- */
-.kpi-item:nth-child(1) { animation-delay: 0.2s; }
-.kpi-item:nth-child(2) { animation-delay: 0.3s; }
-.kpi-item:nth-child(3) { animation-delay: 0.4s; }
-.kpi-item:nth-child(4) { animation-delay: 0.5s; }
-.kpi-item:nth-child(5) { animation-delay: 0.6s; }
-
-
-/* --- 5. RESPONSIVIDADE --- */
-@media (max-width: 768px) {
-  h2 { font-size: 2rem; }
-  main { padding: 0 var(--space-sm); }
-  
-  /* --- NOVO: Ajuste do layout de duas colunas para uma só --- */
-  .layout-duas-colunas {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-  .coluna-texto-impacto { text-align: center; }
-
-  .header-content { flex-direction: column; gap: var(--space-sm); }
-  nav { flex-wrap: wrap; justify-content: center; gap: 5px; }
-  .nav-button { font-size: 0.9rem; padding: 8px 12px; }
-
-  /* Ajustes para tabelas e listas (Mantido) */
-  .swot-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .swot-grid-container { min-width: 650px; }
-  .kpi-item { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .kpi-content { flex-shrink: 0; min-width: 180px; }
-}
-
-/* Adicione este novo bloco no final do seu arquivo */
-
-/* --- 6. NOVO FOOTER SUTIL E INTEGRADO --- */
-footer {
-  /* Retornamos ao gradiente original para o footer inteiro */
-  background: linear-gradient(45deg, var(--rosa-vibrante), var(--rosa-profundo));
-  background-size: 200% 200%;
-  animation: gradientFlow 8s ease infinite;
-  
-  color: var(--branco);
-  padding: var(--space-md) var(--space-lg);
-  margin-top: var(--space-xl);
-}
-
-.footer-content {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between; /* Coloca cada span em uma ponta */
-  align-items: center;
-  flex-wrap: wrap; /* Permite que o conteúdo quebre a linha em telas pequenas */
-  gap: var(--space-sm); /* Espaço entre os itens quando quebram a linha */
-}
-
-.footer-copyright,
-.footer-developer-credit {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-/* Estilo do link da sua divulgação */
-.footer-developer-credit a {
-  color: var(--branco); /* Mesma cor do texto */
-  font-weight: 700;
-  text-decoration: underline;
-  margin-left: var(--space-xs);
-  transition: opacity 0.3s ease;
-}
-
-.footer-developer-credit a:hover {
-  opacity: 0.8; /* Efeito sutil ao passar o mouse */
-}
-
-
-/* --- 7. ESTILOS DA PÁGINA DE CONTATO (Mantido) --- */
-/* O CSS da página de contato que fizemos antes continua perfeito e não precisa de alterações */
-.contato-page-content {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--space-xl) 0;
-}
+/* Contato Page */
+.contato-page-content { width: 100%; display: flex; justify-content: center; align-items: center; padding: var(--space-xl) 0; }
 .contato-card { max-width: 500px; width: 100%; text-align: center; }
 .contato-title { font-size: 2.5rem; background: linear-gradient(45deg, var(--rosa-vibrante), var(--rosa-profundo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; margin-bottom: var(--space-xs); }
 .contato-subtitle { font-size: 1.2rem; font-weight: 600; color: var(--roxo-texto); margin-bottom: var(--space-lg); }
@@ -374,24 +263,71 @@ footer {
 .secondary-btn { background: none; border: 2px solid var(--rosa-header); color: var(--roxo-texto); font-weight: 700; padding: 10px 25px; border-radius: 50px; cursor: pointer; transition: var(--transicao-rapida); }
 .secondary-btn:hover { background-color: var(--rosa-vibrante); border-color: var(--rosa-vibrante); color: var(--branco); box-shadow: var(--sombra-elevada); }
 
-/* --- AJUSTE RESPONSIVO PARA O NOVO FOOTER --- */
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column; /* Coloca os textos um sobre o outro */
-    justify-content: center; /* Centraliza no mobile */
-    text-align: center;
-  }
+/* Em: global.css */
+
+/* Parallax (AGORA EM TELA CHEIA) */
+.parallax-section {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--branco);
+
+  background-image: url('../assets/leitão.jpg');
+  width: 100%; /* Já será 100% por causa do 'main' */
+  min-height: 100vh; /* 100% da altura da tela */
+
+  /* Centraliza o conteúdo (h2, card) verticalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Padding interno para o conteúdo não colar nas bordas */
+  padding: var(--space-xl) var(--space-md); 
 }
 
-/* Adicione esta regra ao seu CSS */
-
-.logo-area-link {
-  text-decoration: none; /* Remove o sublinhado */
-  color: inherit; /* Garante que a cor do texto do h1 seja herdada */
+.parallax-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(74, 42, 84, 0.7); /* Overlay escuro */
+  z-index: 1;
 }
-/* Adicione este código ao final do bloco 8 */
 
-/* Estilo para a seta de scroll animada */
+.parallax-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Regras para conter o CONTEÚDO DENTRO do parallax */
+.parallax-section h2 {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--branco);
+  
+  /* Limita o h2 ao 'max-width' original */
+  max-width: 1100px; 
+  width: 100%;
+}
+
+.parallax-section .card {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--roxo-texto);
+  
+  /* Limita o card ao 'max-width' original */
+  max-width: 1100px;
+  width: 100%;
+}
+/* Scroll Arrow */
+/* Em: global.css */
+
+/* Procure a regra .scroll-arrow-container e adicione o cursor */
 .scroll-arrow-container {
   position: absolute;
   bottom: 30px;
@@ -401,11 +337,69 @@ footer {
   animation: bounce 2s infinite;
   z-index: 5;
   opacity: 0;
-  animation-delay: 1s; /* Aparece 1s depois da página carregar */
+  animation-delay: 1s;
   animation-fill-mode: forwards;
+  cursor: pointer; /* <<< ADICIONE ESTA LINHA */
 }
 
-/* Animação de "pulo" suave */
+/* Cursor Pointer Universal */
+.nav-button,
+.logo-area-link,
+.card,
+.timeline-content,
+.kpi-item,
+.swot-header,
+.swot-quadrant li,
+.contato-item,
+.secondary-btn,
+.contato-link-btn,
+.footer-developer-credit a {
+  cursor: pointer;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--rosa-header); }
+::-webkit-scrollbar-thumb { background: var(--rosa-vibrante); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--rosa-profundo); }
+
+/* --- 5. RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+  h2 { font-size: 2rem; }
+  main { padding: 0 var(--space-sm); }
+  
+  .layout-duas-colunas {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .coluna-texto-impacto { text-align: center; }
+
+  .header-content { flex-direction: column; gap: var(--space-sm); }
+  nav { flex-wrap: wrap; justify-content: center; gap: 5px; }
+  .nav-button { font-size: 0.9rem; padding: 8px 12px; }
+
+  .swot-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .swot-grid-container { min-width: 650px; }
+  .kpi-item { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .kpi-content { flex-shrink: 0; min-width: 180px; }
+  
+  .footer-content {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* --- 6. ANIMAÇÕES (KEYFRAMES) --- */
+
+/* Animação do Gradiente do Footer */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animação da Seta de Scroll */
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateX(-50%) translateY(0);
@@ -419,17 +413,128 @@ footer {
   }
 }
 
-.nav-button {
-  background: none;
-  border: none;
-  font-size: 1.1rem;
-  font-weight: 800;
-  padding: 12px 20px;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: var(--transicao-rapida);
-  position: relative;
-  overflow: hidden;
-  color: var(--roxo-texto);
-  text-decoration: none; /* Não afeta o botão, mas não prejudica */
+/* Em: global.css */
+
+/* --- 5. RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+  
+  /* --- 5.1. TIPOGRAFIA E LAYOUT BÁSICO --- */
+  main {
+    /* 'main' já foi corrigido acima, esta regra não é mais necessária */
+    /* Apenas garantindo que o wrapper tenha padding */
+    .content-wrapper {
+      padding: 0 var(--space-sm);
+    }
+  }
+
+  h1 { font-size: 1.5rem; } /* Tamanho de H1 para mobile */
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.3rem; }
+  .coluna-texto-impacto h3 { font-size: 1.8rem; }
+  section { padding: var(--space-md) 0; } /* Menos padding vertical */
+
+  /* Layout de 2 colunas empilha verticalmente */
+  .layout-duas-colunas {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .coluna-texto-impacto { text-align: center; }
+
+  /* --- 5.2. HEADER E NAVEGAÇÃO --- */
+  header {
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: var(--space-md); /* Mais espaço entre logo e nav */
+  }
+
+  /* Centraliza a logo e título */
+  .logo-area-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  
+  .logo-wrapper {
+    width: 80px; /* Logo menor */
+    height: 80px;
+    border-width: 4px;
+  }
+  .logo-img {
+    width: 50px; /* Imagem interna menor */
+    height: 50px;
+    transform: scale(1.9); /* Mantém o zoom inicial */
+  }
+  header h1 {
+    text-align: center;
+    font-size: 1.5rem; /* Título menor */
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+  .nav-button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  /* --- 5.3. COMPONENTES (SWOT, KPI, TIMELINE) --- */
+
+  /* SWOT: Remove scroll, empilha o grid */
+  .swot-card { 
+    overflow: hidden; /* Remove o scroll-x */
+  }
+  .swot-grid-container {
+    grid-template-columns: 1fr; /* Empilha os 4 quadrantes */
+    grid-template-rows: auto auto auto auto; /* Define 4 linhas */
+    min-width: 0; /* REMOVE o min-width */
+  }
+
+  /* KPIs: Remove scroll, empilha os itens */
+  .kpi-item {
+    flex-direction: column; /* Empilha verticalmente */
+    overflow-x: hidden; /* Remove o scroll-x */
+  }
+  .kpi-content {
+    min-width: 0; /* REMOVE o min-width */
+    border-left: none; /* Remove bordas laterais */
+    padding: var(--space-sm);
+    /* Adiciona borda inferior para separar */
+    border-bottom: 1px dashed var(--rosa-header);
+  }
+  .kpi-content:last-child {
+    border-bottom: none; /* Remove a última borda */
+  }
+
+  /* TIMELINE: Ajusta espaçamento */
+  .timeline::before {
+    left: 10px; /* Aproxima a linha da borda */
+  }
+  .timeline-item {
+    padding-left: 40px; /* Reduz o padding */
+    margin-bottom: var(--space-sm);
+  }
+  .timeline-dot {
+    left: 0px; /* Encosta o ponto na borda */
+    width: 22px;
+    height: 22px;
+    border-width: 4px;
+  }
+
+  /* --- 5.4. FOOTER --- */
+  .footer-content {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .footer-copyright,
+  .footer-developer-credit {
+    font-size: 0.85rem; /* Texto ligeiramente menor */
+  }
 }

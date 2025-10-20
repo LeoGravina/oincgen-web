@@ -4,6 +4,7 @@ function Swot() {
   return (
     <section id="swot" className="active">
       <h2>Análise SWOT</h2>
+      <div className="content-wrapper">
       <div className="card swot-card">
         {/* Container principal que usará CSS Grid */}
         <div className="swot-grid-container">
@@ -73,6 +74,7 @@ function Swot() {
           </div>
 
         </div>
+      </div>
       </div>
     </section>
   );

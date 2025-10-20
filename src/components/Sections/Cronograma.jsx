@@ -3,6 +3,7 @@ import React from 'react';
 function Cronograma() {
   return (
     <section id="cronograma" className="active">
+      <div className="content-wrapper">
       <h2>Cronograma de Implementação</h2>
       <div className="timeline">
         <div className="timeline-item">
@@ -40,6 +41,7 @@ function Cronograma() {
             <p>Expansão da operação e revisão estratégica para novas metas de crescimento.</p>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

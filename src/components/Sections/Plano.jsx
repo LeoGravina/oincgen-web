@@ -1,9 +1,11 @@
 import React from 'react';
+// 1. REMOVA O 'import { motion }' daqui
 
 function Plano() {
   return (
-    <section id="plano" className="active">
+    <section id="plano"> 
       <h2>Plano Estratégico</h2>
+      <div className="content-wrapper">
       <div className="card">
         <p>
           O plano estratégico da OincGen busca consolidar a empresa como referência em genética suína e bem-estar animal. As metas incluem aumento da taxa de prenhez, redução da mortalidade, melhoria do ganho de peso e diminuição dos custos de produção.
@@ -11,10 +13,10 @@ function Plano() {
 
         <h3 className="titulo-azul">Metas e Indicadores (KPIs)</h3>
         
-        {/* NOVA ESTRUTURA PARA A LISTA DE KPIS */}
+        {/* 2. REMOVA o <motion.div> do container */}
         <div className="kpi-list-container">
           
-          {/* Item 1 */}
+          {/* 3. REMOVA o <motion.div> de cada item */}
           <div className="kpi-item">
             <div className="kpi-content kpi-meta">
               <span className="kpi-label">Meta</span>
@@ -30,7 +32,6 @@ function Plano() {
             </div>
           </div>
 
-          {/* Item 2 */}
           <div className="kpi-item">
             <div className="kpi-content kpi-meta">
               <span className="kpi-label">Meta</span>
@@ -46,7 +47,6 @@ function Plano() {
             </div>
           </div>
           
-          {/* Item 3 */}
           <div className="kpi-item">
             <div className="kpi-content kpi-meta">
               <span className="kpi-label">Meta</span>
@@ -62,7 +62,6 @@ function Plano() {
             </div>
           </div>
 
-          {/* Item 4 */}
           <div className="kpi-item">
             <div className="kpi-content kpi-meta">
               <span className="kpi-label">Meta</span>
@@ -78,7 +77,6 @@ function Plano() {
             </div>
           </div>
 
-          {/* Item 5 */}
           <div className="kpi-item">
             <div className="kpi-content kpi-meta">
               <span className="kpi-label">Meta</span>
@@ -101,9 +99,7 @@ function Plano() {
           Para alcançar as metas estabelecidas e consolidar a OincGen como referência em genética e em bem-estar animal, algumas estratégias foram definidas:
         </p>
 
-        <ul className="estrategias">
-          {/* ... O restante do conteúdo continua o mesmo ... */}
-        </ul>
+      </div>
       </div>
     </section>
   );

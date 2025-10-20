@@ -8,6 +8,7 @@ function Portfolio() {
   return (
     <section id="portfolio">
       <h2>Portfólio da OincGen</h2>
+      <div className="content-wrapper">
       <div className="card portfolio">
         <div className="portfolio-imagem">
           <img src={equipeImg} alt="Equipe OincGen" />
@@ -32,6 +33,7 @@ function Portfolio() {
             <FaMapMarkerAlt /> <span>Zona Rural – MG</span>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
