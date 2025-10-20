@@ -1,9 +1,12 @@
 import React from 'react';
 import equipeImg from '../../assets/equipe.png';
 
+// --- NOVO: Importando os ícones ---
+import { FaEnvelope, FaInstagram, FaMapMarkerAlt } from 'react-icons/fa';
+
 function Portfolio() {
   return (
-    <section id="portfolio" className="active">
+    <section id="portfolio">
       <h2>Portfólio da OincGen</h2>
       <div className="card portfolio">
         <div className="portfolio-imagem">
@@ -17,11 +20,18 @@ function Portfolio() {
           Nosso propósito é garantir uma suinocultura ética, eficiente e sustentável.
         </p>
 
-        <p className="contato">
-          <strong>Contatos:</strong> contato@oincgen.com.br |
-          <strong>Instagram:</strong> <a href="https://instagram.com/oincgen" target="_blank" rel="noopener noreferrer">@oincgen</a><br />
-          <strong>Localização:</strong> Zona Rural – MG
-        </p>
+        {/* --- ALTERADO: Seção de contato com ícones --- */}
+        <div className="contato-icones">
+          <a href="mailto:contato@oincgen.com.br">
+            <FaEnvelope /> <span>contato@oincgen.com.br</span>
+          </a>
+          <a href="https://instagram.com/oincgen" target="_blank" rel="noopener noreferrer">
+            <FaInstagram /> <span>@oincgen</span>
+          </a>
+          <div>
+            <FaMapMarkerAlt /> <span>Zona Rural – MG</span>
+          </div>
+        </div>
       </div>
     </section>
   );
